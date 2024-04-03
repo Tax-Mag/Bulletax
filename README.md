@@ -1,6 +1,6 @@
-# Bulletin
+# Bulletax
 
-Bulletin is a minimal newsletter theme for [Ghost](https://github.com/TryGhost/Ghost). The theme divides your homepage into two sections. The left-hand section is optimized for capturing new email subscribers with a punchy background color. The right-hand section shows an excerpt from the latest issue you’ve published.
+Bulletax is a minimal newsletter theme for [Ghost](https://github.com/TryGhost/Ghost) based on [Bulletin](https://bulletin.ghost.io). The theme divides your homepage into two sections. The left-hand section is optimized for capturing new email subscribers with a punchy background color. The right-hand section shows an excerpt from the latest issue you’ve published.
 
 **Demo: https://bulletin.ghost.io**
 
