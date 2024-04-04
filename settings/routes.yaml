@@ -1,0 +1,14 @@
+routes:
+
+collections:
+  /issues/:
+    permalink: /issue/{slug}/
+    template: issues
+    filter: primary_tag:issue
+  /:
+    permalink: /{slug}/
+    filter: primary_tag:-[issue]
+
+taxonomies:
+  tag: /tag/{slug}/
+  author: /author/{slug}/
