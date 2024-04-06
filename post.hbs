@@ -1,9 +1,10 @@
 {{!< default}}
 
+
 {{#post}}
-
-<main id="gh-main" class="gh-main">
-    {{> "article"}}
-</main>
-
+  {{#has tag="issue"}}
+    {{> posts/post-issue ..}}
+  {{else}}
+    {{> posts/post-generic ..}}
+  {{/has}}
 {{/post}}
