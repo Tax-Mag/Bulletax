@@ -2,7 +2,7 @@ routes:
 
 collections:
   /issues/:
-    permalink: /issue/{slug}/
+    permalink: /issues/{slug}/
     template: issues
     filter: primary_tag:issue
   /:
