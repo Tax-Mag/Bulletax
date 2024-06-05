@@ -1,10 +1,9 @@
 {{!< default}}
 
-
 {{#post}}
-  {{#has tag="issue"}}
-    {{> posts/post-issue ..}}
-  {{else}}
-    {{> posts/post-generic ..}}
-  {{/has}}
+    {{#match primary_tag.slug "=" "issue"}}
+      {{> posts/post-issue ..}}
+    {{else}}
+      {{> posts/post-generic ..}}
+    {{/match}}
 {{/post}}

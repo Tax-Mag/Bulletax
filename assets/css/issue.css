@@ -5,24 +5,46 @@
 }
 
 .bulletax-grid {
-    grid-column: wide;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     column-gap: 20px;
 }
 
-#bulletax-issue-intro .cover-container {
-    grid-column: 1 / 7;
-    aspect-ratio: 610 / 687;
+@media (max-width: 767px) {
+    #bulletax-issue {
+        padding-top: 20px;
+    }
+}
+
+#bulletax-issue h1 {
+    font-size: 2.8rem;
+}
+
+#bulletax-issue-intro {
+    grid-column: wide;
+    grid-template-rows: [start] 1fr [cover-start] 6fr [cover-end] 1fr [end];
+    grid-template-columns: [start cover-container-start] 6fr [cover-container-end] 1fr [text-container-start] 4fr [text-container-end] 1fr [end];
+    margin-bottom: 8rem;
+}
+
+#bulletax-issue-intro #cover-container {
+    grid-column: cover-container-start / cover-container-end;
+    grid-row: start / end;
     background: var(--color-light-gray);
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-#bulletax-issue-intro .cover-container img {
-    max-width: 75%;
+@media (min-width: 1111px) {
+    #bulletax-issue-intro #cover-container {
+        aspect-ratio: 610 / 687;
+    }
+}
+
+#bulletax-issue-intro #cover-container img {
     max-height: 75%;
+    max-width: 70%;
     --shadow-color: 0deg 0% 60%;
     box-shadow:
         0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.36),
@@ -31,14 +53,127 @@
         5px 10px 12.6px -2.5px hsl(var(--shadow-color) / 0.36);
 }
 
-@media (max-width: 767px) {
-    .bulletax-grid {
-        grid-column: full;
-    }
+#bulletax-issue-intro #text-container {
+    grid-column: text-container-start / text-container-end;
+    grid-row: cover-start;
+}
 
-    #bulletax-issue-intro .cover-container {
+#bulletax-issue-intro #text-container .gh-content {
+    font-size: var(--content-font-size, 1.6rem);
+    margin: 2rem 0;
+}
+
+@media (max-width: 767px) {
+    #bulletax-issue-intro #cover-container {
         grid-column: 1 / -1;
         aspect-ratio: unset;
         height: 50vh;
     }
+
+    #bulletax-issue-intro #text-container {
+        grid-row: end;
+        grid-column: start / end;
+        text-align: center;
+        padding: 4rem 0;
+    }
+}
+
+#bulletax-issue-preview {
+    grid-column: full;
+    height: 500px;
+    background-size: auto 100%;
+    background-repeat: repeat-x;
+    background-position: center;
+    position: relative;
+}
+
+#bulletax-issue-preview .gradient-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0) 0%,
+        var(--ghost-accent-color) 100%
+    );
+}
+
+#bulletax-subscribe-cta {
+    grid-column: full;
+    background-color: var(--ghost-accent-color);
+    padding: 0rem 20px 8rem;
+    text-align: center;
+}
+
+#bulletax-subscribe-cta h3 {
+    margin-bottom: 2.4rem;
+}
+
+#bulletax-subscribe-cta .gh-cta-link {
+    --color-secondary-text: black;
+    --color-darker-gray: var(--color-light-gray);
+}
+
+@media (max-width: 967px) {
+    #bulletax-issue-preview {
+        height: 340px;
+    }
+
+    #bulletax-subscribe-cta {
+        padding-bottom: 6rem;
+    }
+}
+
+@media (max-width: 767px) {
+    #bulletax-issue-preview {
+        height: 240px;
+    }
+}
+
+#bulletax-recommendations {
+    padding: 8rem 0 0;
+    text-align: center;
+}
+
+#bulletax-recommendations header {
+    grid-column: 1 / -1;
+    margin-bottom: 4rem;
+}
+
+#bulletax-recommendations .recommended-issue {
+    grid-column-end: span 4;
+    margin-bottom: 2rem;
+}
+
+#bulletax-recommendations .recommended-issue .cover-preview {
+    aspect-ratio: 1 / 1;
+    background: var(--color-light-gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+#bulletax-recommendations .recommended-issue .cover-preview img {
+    max-height: 75%;
+    max-width: 50%;
+    --shadow-color: 0deg 0% 60%;
+    box-shadow:
+        0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.36),
+        0.8px 1.6px 2px -0.8px hsl(var(--shadow-color) / 0.36),
+        2.1px 4.1px 5.2px -1.7px hsl(var(--shadow-color) / 0.36),
+        5px 10px 12.6px -2.5px hsl(var(--shadow-color) / 0.36);
+}
+
+@media (max-width: 567px) {
+    #bulletax-recommendations .recommended-issue {
+        grid-column-end: span 12;
+    }
+}
+
+#js-post-content {
+    display: none;
+    visibility: hidden;
 }

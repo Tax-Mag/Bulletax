@@ -1,8 +1,8 @@
 {{#post}}
 
-    <main id="gh-main" class="gh-main gh-canvas">
+    <main id="bulletax-issue" class="gh-main gh-canvas">
         <section id="bulletax-issue-intro" class="bulletax-grid">
-            <div class="cover-container">
+            <div id="cover-container">
                 {{#if feature_image}}
                     <img
                         srcset="{{img_url feature_image size="s"}} 300w,
@@ -16,6 +16,73 @@
                     >
                 {{/if}}
             </div>
+            <div id="text-container">
+                <h1 class="gh-article-title">{{title}}</h1>
+                <time class="post-date" datetime="{{date format='YYYY-MM-DD'}}">
+                    {{date format="MMM YYYY"}}
+                </time>
+                <div class="gh-content">{{excerpt}}</div>
+                <button class="gh-btn" onclick="location.href='#reader';">Read now</button>
+                {{!-- TODO: make button scroll --}}
+            </div>
+        </section>
+        <div id="reader"></div>
+        {{#if @site.members_enabled}}
+            <section id="bulletax-issue-preview">
+                {{#unless @member.paid}}<div class="gradient-overlay"></div>{{/unless}}
+            </section>
+            {{#unless @member.paid}}
+                <section id="bulletax-subscribe-cta" class="gh-cta">
+                    <h4 class="gh-cta-title">Only subscribers can read the full issue.</h4>
+                    <div class="gh-cta-actions">
+                        <button class="gh-btn" href="#/portal/signup" data-portal="signup">Subscribe now</button>
+                        <span class="gh-cta-link" href="#/portal/signin" data-portal="signin">Already have an account? Sign in.</span>
+                    </div>
+                </section>
+            {{/unless}}
+        {{/if}}
+        {{#get "posts" filter="primary_tag:issue+slug:-{{slug}}" order="published_at asc" limit="3"}}
+            {{#if posts}}
+                <section id="bulletax-recommendations" class="bulletax-grid">
+                    <header>
+                        <h4>You may also be interested</h4>
+                    </header>
+                    {{#foreach posts}}
+                        <a class="recommended-issue" href="{{url}}">
+                            <div class="cover-preview">
+                                {{#if feature_image}}
+                                    <img
+                                        srcset="{{img_url feature_image size="s"}} 300w,
+                                                {{img_url feature_image size="m"}} 720w,
+                                                {{img_url feature_image size="l"}} 960w,
+                                                {{img_url feature_image size="xl"}} 1200w,
+                                                {{img_url feature_image size="xxl"}} 2000w"
+                                        sizes="(max-width: 1200px) 100vw, 1200px"
+                                        src="{{img_url feature_image size="xl"}}"
+                                        alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}"
+                                    >
+                                {{/if}}
+                            </div>
+                            <h5>{{title}}</h5>
+                            <time class="post-date" datetime="{{date format='YYYY-MM-DD'}}">
+                                {{date format="MMM YYYY"}}
+                            </time>
+                        </a>
+                    {{/foreach}}
+                </section>
+            {{/if}}
+        {{/get}}
+        {{!-- NOTE: this block utilizes the post content as a makeshift custom field which is removed from the DOM. --}}
+        <section id="js-post-content">
+            {{content}}
+            <script>
+                const metaContent = document.getElementById("js-post-content")
+                const previewSrc = metaContent.getElementsByTagName("img")[0];
+                console.log(previewSrc)
+                const previewDiv = document.getElementById("bulletax-issue-preview");
+                previewDiv.setAttribute("style", `background-image: url(\"${previewSrc.src}\");`);
+                document.getElementById("bulletax-issue").removeChild(metaContent);
+            </script>
         </section>
     </main>
 
